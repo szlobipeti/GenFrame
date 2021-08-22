@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Source Files\File">
+      <UniqueIdentifier>{22c1eb14-00ac-40c8-91d5-e0402f4faa81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\File\FileFormat">
+      <UniqueIdentifier>{eb92dcd1-1813-4cb8-a3c5-b1d960ec7d5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Exception">
+      <UniqueIdentifier>{c6bb905f-1ac6-44e5-b79d-2c753d5f02ba}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\CPP\GenFrame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\CPP\Exception\NotImplementedException.cpp">
+      <Filter>Source Files\Exception</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CPP\File\File.cpp">
+      <Filter>Source Files\File</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CPP\File\FileConverter.cpp">
+      <Filter>Source Files\File</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CPP\File\FileFormat\FileDDS.cpp">
+      <Filter>Source Files\File\FileFormat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CPP\File\FileFormat\FileFBX.cpp">
+      <Filter>Source Files\File\FileFormat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CPP\File\FileFormat\FileOBJ.cpp">
+      <Filter>Source Files\File\FileFormat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CPP\File\FileFormat\FileWAV.cpp">
+      <Filter>Source Files\File\FileFormat</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
