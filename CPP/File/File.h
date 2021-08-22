@@ -35,9 +35,6 @@ protected: virtual bool oWrite(std::ofstream& outFile) = 0;
 		 // Default implementation of the Write virtual function
 protected: virtual bool vWrite(std::ofstream& outFile, void* additionalParameters);
 
-		 // Pure Virtual ConvertTo function
-protected: virtual bool oConvertTo(File& File) = 0;
-
 		 // Reads the file from the given file path
 public: bool Read(std::filesystem::path filePath);
 
@@ -49,7 +46,6 @@ public: bool Read(std::ifstream& inFile, size_t dataSize);
 
 	  // Reads the file from the given inFile ifstream, beginning at dataBegin for dataSize bytes
 public: bool Read(std::ifstream& inFile, size_t dataBegin, size_t dataSize);
-
 
 	  // Writes the file to the given file path
 public: bool Write(std::filesystem::path filePath);
