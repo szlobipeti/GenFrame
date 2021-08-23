@@ -14,8 +14,6 @@ namespace gen
 		public: FileConverter();
 		public: FileConverter(gen::file::File* File1, gen::file::File* File2);
 
-		protected: virtual bool oSetFile1() = 0;
-		protected: virtual bool oSetFile2() = 0;
 		protected: virtual bool oConvertFrom1To2() = 0;
 		protected: virtual bool oConvertFrom2To1() = 0;
 		};

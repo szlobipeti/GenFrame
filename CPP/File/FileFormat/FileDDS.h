@@ -11,9 +11,9 @@ namespace gen
 		{
 			class FileDDS : public File
 			{
-			private: DDS_HEADER Header;
-			private: char* PixelData = nullptr;
-			private: size_t PixelDataSize = 0;
+			public: DDS_HEADER Header;
+			public: char* PixelData = nullptr;
+			public: size_t PixelDataSize = 0;
 
 			public: ~FileDDS();
 
