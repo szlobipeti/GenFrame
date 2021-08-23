@@ -24,7 +24,7 @@ bool gen::file::format::FileDDS::oRead(std::ifstream& inFile, size_t dataBegin, 
 		return false;
 	}
 
-	inFile.read(reinterpret_cast<char* (&header), 124);
+	inFile.read(reinterpret_cast<char*>(&Header), 124);
 
 	PixelDataSize = dataSize - 128;
 	PixelData = (char*)malloc(PixelDataSize);
