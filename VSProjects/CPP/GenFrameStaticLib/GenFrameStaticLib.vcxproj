@@ -163,7 +163,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\CPP\Exception\NotImplementedException.cpp" />
+    <ClCompile Include="..\..\..\CPP\Error\NotImplementedException.cpp" />
     <ClCompile Include="..\..\..\CPP\File\File.cpp" />
     <ClCompile Include="..\..\..\CPP\File\FileConverter.cpp" />
     <ClCompile Include="..\..\..\CPP\File\FileFormat\FileDDS.cpp" />
@@ -172,8 +172,12 @@
     <ClCompile Include="..\..\..\CPP\File\FileFormat\FileWAV.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\CPP\Exception\GenException.h" />
-    <ClInclude Include="..\..\..\CPP\Exception\NotImplementedException.h" />
+    <ClInclude Include="..\..\..\CPP\Binary\BinaryRead.h" />
+    <ClInclude Include="..\..\..\CPP\Binary\BinaryWrite.h" />
+    <ClInclude Include="..\..\..\CPP\Binary\GenBinary.h" />
+    <ClInclude Include="..\..\..\CPP\Error\GenError.h" />
+    <ClInclude Include="..\..\..\CPP\Error\StaticAssert.h" />
+    <ClInclude Include="..\..\..\CPP\Error\NotImplementedException.h" />
     <ClInclude Include="..\..\..\CPP\File\File.h" />
     <ClInclude Include="..\..\..\CPP\File\FileConverter.h" />
     <ClInclude Include="..\..\..\CPP\File\FileFormat\FileDDS.h" />
