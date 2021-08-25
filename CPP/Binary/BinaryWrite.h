@@ -51,7 +51,7 @@ namespace gen
 			namespace little
 			{
 				template<typename U>
-				__forceinline typename std::enable_if<(!std::is_pointer<U>::value&& std::is_integral<U>::value), void>::type Write(std::ofstream& outFile, U Value)
+				__forceinline typename std::enable_if<(!std::is_pointer<U>::value&& std::is_integral<U>::value), void>::type Write(std::ofstream& outFile, U& Value)
 				{
 					outFile.write(reinterpret_cast<char*>(&Value), sizeof(U));
 				}
@@ -60,7 +60,7 @@ namespace gen
 			namespace big
 			{
 				template<typename U>
-				__forceinline typename std::enable_if<(!std::is_pointer<U>::value&& std::is_integral<U>::value), void>::type Write(std::ofstream& outFile, U Value)
+				__forceinline typename std::enable_if<(!std::is_pointer<U>::value&& std::is_integral<U>::value), void>::type Write(std::ofstream& outFile, U& Value)
 				{
 					for (size_t i = 0; i < sizeof(U); i++)
 					{

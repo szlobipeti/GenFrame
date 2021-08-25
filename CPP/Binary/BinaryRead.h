@@ -70,7 +70,7 @@ namespace gen
 			namespace little
 			{
 				template<typename U>
-				__forceinline typename std::enable_if<(!std::is_pointer<U>::value && std::is_integral<U>::value), void>::type Read(std::ifstream& inFile, U Value)
+				__forceinline typename std::enable_if<(!std::is_pointer<U>::value && std::is_integral<U>::value), void>::type Read(std::ifstream& inFile, U& Value)
 				{
 					inFile.read(reinterpret_cast<char*>(&Value), sizeof(U));
 				}		
@@ -79,7 +79,7 @@ namespace gen
 			namespace big
 			{
 				template<typename U>
-				__forceinline typename std::enable_if<(!std::is_pointer<U>::value&& std::is_integral<U>::value), void>::type Read(std::ifstream& inFile, U Value)
+				__forceinline typename std::enable_if<(!std::is_pointer<U>::value&& std::is_integral<U>::value), void>::type Read(std::ifstream& inFile, U& Value)
 				{
 					for (size_t i = 0; i < sizeof(U); i++)
 					{
