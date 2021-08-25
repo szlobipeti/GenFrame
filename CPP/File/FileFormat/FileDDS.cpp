@@ -1,4 +1,6 @@
 #include "FileDDS.h"
+#include "..\..\Binary\GenBinary.h"
+namespace bin = gen::binary::read::little;
 
 gen::file::format::FileDDS::~FileDDS()
 {
@@ -17,18 +19,21 @@ bool gen::file::format::FileDDS::oRead(std::ifstream& inFile, size_t dataBegin, 
 	}
 
 	uint32_t Magic = 0;
-	inFile.read(reinterpret_cast<char*>(&Magic), 4);
+	// inFile.read(reinterpret_cast<char*>(&Magic), 4);
+	bin::Read(inFile, &Magic, 4);
 
 	if (Magic != DDS_MAGIC)
 	{
 		return false;
 	}
 
-	inFile.read(reinterpret_cast<char*>(&Header), 124);
+	// inFile.read(reinterpret_cast<char*>(&Header), 124);
+	bin::Read(inFile, &Header, 124);
 
 	PixelDataSize = dataSize - 128;
 	PixelData = (char*)malloc(PixelDataSize);
-	inFile.read(PixelData, PixelDataSize);
+	// inFile.read(PixelData, PixelDataSize);
+	bin::Read(inFile, PixelData, PixelDataSize);
 
 	return true;
 }

@@ -1,7 +1,8 @@
+#pragma once
+
 #include <fstream>
 #include <stdint.h>
 #include <string>
-#include "..\Error\StaticAssert.h"
 
 namespace gen
 {
@@ -11,62 +12,78 @@ namespace gen
 		{
 			namespace little
 			{
-				// Default Templates
-				
-				// Read Type from inFile for sizeof Type
-				template <typename T>
-				typename std::enable_if<true> check()
+				template<typename T>
+				__forceinline typename std::enable_if<std::is_pointer<T>::value, void>::type Read(std::ifstream& inFile, T Value, size_t Size)
 				{
-					bool test(T in)
+					inFile.read(reinterpret_cast<char*>(Value), Size);
+				}
+
+				template<typename T>
+				__forceinline typename std::enable_if<std::is_pointer<T>::value, bool>::type ReadBlock(std::ifstream& inFile, T Block, size_t Size)
+				{
+					if (Size == 0)
 					{
 						return false;
 					}
 
-					inline void Read(std::ifstream & inFile, T Type)
+					if (Block != nullptr)
 					{
-						inFile.read(reinterpret_cast<char*>(&Type), sizeof(T));
+						return false;
 					}
+
+					if (Size > 8)
+					{
+						Size = 8;
+					}
+
+					uint64_t Count = 0;
+
+					Read(inFile, &Count, Size);
+					Block = (T)malloc(Count);
+					Read(inFile, Block, Count);
+
+					return true;
 				}
 
-				inline void Read(std::ifstream& inFile, T Type)
+				__forceinline bool ReadString(std::ifstream& inFile, std::string String, size_t Size)
 				{
-					inFile.read(reinterpret_cast<char*>(&Type), sizeof(T));
-				}
-				// Read type from inFile for the specified size
-				template <class T>
-				inline void Read<T, std::enable_if<std::is_pointer<T>::value>>(std::ifstream& inFile, T Type, size_t size)
-				{
-					inFile.read(reinterpret_cast<char*>(&Type), size);
-				}
+					if (Size == 0)
+					{
+						return false;
+					}
 
-				// Template specifications
+					if (Size > sizeof(size_t))
+					{
+						Size = sizeof(size_t);
+					}
+
+					size_t Count = 0;
+
+
+
+					Read(inFile, &Count, Size);
+					Read(inFile, &Count, Size);
+					String.resize(Count);
+					Read(inFile, &String[0], Count);
+
+					return true;
+				}
 
 				/*
-				template <>
-				inline void Read<char*,>(std::ifstream& inFile, char* Value)
-				{
-					return;
-				}
+				// Default Templates
+				
+				// Read to Value from inFile for the specified size
+				template <typename T>
+				extern inline typename std::enable_if<std::is_pointer<T>::value, void>::type Read(std::ifstream& inFile, T Value, size_t Size);
 
-				template <>
-				inline void Read<char*>
+				// Read an unsigned integer of specified Size for block size, then read the following block to Block. Block has to be a nullptr to be able to read. Size is capped to 8
+				template <typename T>
+				extern inline typename std::enable_if<std::is_pointer<T>::value, bool>::type ReadBlock(std::ifstream& inFile, T Value, size_t Size);
 
-				template <>
-				inline void Read<char*>(std::ifstream& inFile, char* Value, size_t size)
-				{
-					inFile.read(Value, size);
-				}
-
-				// Read string from inFile for sizeof size_t
-				template <>
-				inline void Read<std::string>(std::ifstream& inFile, std::string Value)
-				{
-					size_t size = 0;
-					Read(inFile, size);
-					Value.resize(size);
-					Read(inFile, &Value[0], size);
-				}
+				// Read an unsigned integer of specified Size for String legnth, then read the String. Size is capped to size of size_t
+				extern inline bool ReadString(std::ifstream& inFile, std::string String, size_t Size);
 				*/
+
 			}
 		}
 	}
