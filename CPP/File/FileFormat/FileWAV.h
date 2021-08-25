@@ -20,11 +20,11 @@ namespace gen
 				~sFactChunk();
 			};
 
-			public: static constexpr uint32_t RIFF = 1179011410;
-			public: static constexpr uint32_t WAVE = 1163280727;
-			public: static constexpr uint32_t fmt_ = 544501094;
-			public: static constexpr uint32_t fact = 1952670054;
-			public: static constexpr uint32_t data = 0x64617461;
+			public: static constexpr uint32_t RIFF = 0x46464952;
+			public: static constexpr uint32_t WAVE = 0x45564157;
+			public: static constexpr uint32_t fmt_ = 0x20746d66;
+			public: static constexpr uint32_t fact = 0x74636166;
+			public: static constexpr uint32_t data = 0x61746164;
 
 			public: tWAVEFORMATEX Waveformat;
 			public: char* WaveformatEx = nullptr;
