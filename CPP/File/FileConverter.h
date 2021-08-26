@@ -56,8 +56,8 @@ namespace gen
 				return converter.ConvertFromInnerToOuter();
 			}
 
-			template<typename T, typename O>
-			typename std::enable_if<std::is_base_of<FileConverter<T>, T>::value && !std::is_abstract<T>::value, bool>::type ConvertFromOuterToInner(O* Outer, gen::file::File* Inner)
+			template<typename T, typename I>
+			typename std::enable_if<std::is_base_of<FileConverter<I>, T>::value && !std::is_abstract<T>::value, bool>::type ConvertFromOuterToInner(gen::file::File* Outer, I* Inner)
 			{
 				T converter;
 				converter.SetOuter(Outer);
