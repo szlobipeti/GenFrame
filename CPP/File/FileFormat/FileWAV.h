@@ -34,6 +34,7 @@ namespace gen
 
 			public: ~FileWAV();
 
+			private: __forceinline size_t oType() override { return (size_t)eType::wav; };
 			private: bool oRead(std::ifstream& inFile, size_t dataBegin, size_t dataSize) override;
 			private: bool oWrite(std::ofstream& outFile) override;
 			};

@@ -7,6 +7,15 @@ namespace gen
 {
 namespace file
 {
+enum class eType : size_t
+{
+	NONE,
+	dds,
+	wav,
+	obj,
+	fbx,
+	eTypeSize
+};
 
 class File
 {
@@ -25,6 +34,12 @@ public: enum class eError
 	CouldNotReadFile,
 	CouldNotWriteFile
 } error = eError::NoError;
+
+	  // Pure Virtaul Get Type function
+protected: __forceinline virtual size_t oType() = 0;
+
+		 // Gets the Type of the file
+public: __forceinline size_t Type() { return oType(); };
 
 	  // Pure Virtual Read function
 protected: virtual bool oRead(std::ifstream& inFile, size_t dataBegin, size_t dataSize) = 0;
