@@ -10,7 +10,7 @@ namespace gen
 	{
 		namespace format
 		{
-			class FileWAV : public File
+			class WavFile : public File
 			{
 			public:	struct sFactChunk
 			{
@@ -32,7 +32,7 @@ namespace gen
 			public: size_t WaveDataSize = 0;
 			public: sFactChunk FactChunk;
 
-			public: ~FileWAV();
+			public: ~WavFile();
 
 			private: __forceinline size_t oType() override { return (size_t)eType::wav; };
 			private: bool oRead(std::ifstream& inFile, size_t dataBegin, size_t dataSize) override;

@@ -1,4 +1,4 @@
-#include "FileWAV.h"
+#include "WavFile.h"
 #include "..\..\Binary\GenBinary.h"
 namespace bin
 {
@@ -8,7 +8,7 @@ namespace bin
 	using namespace gen::binary::write::little;
 }
 
-gen::file::format::FileWAV::~FileWAV()
+gen::file::format::WavFile::~WavFile()
 {
 	if (WaveformatEx != nullptr)
 	{
@@ -22,7 +22,7 @@ gen::file::format::FileWAV::~FileWAV()
 	return;
 }
 
-bool gen::file::format::FileWAV::oRead(std::ifstream& inFile, size_t dataBegin, size_t dataSize)
+bool gen::file::format::WavFile::oRead(std::ifstream& inFile, size_t dataBegin, size_t dataSize)
 {
 	uint32_t size = 0;
 	bin::Read(inFile, size);
@@ -100,7 +100,7 @@ bool gen::file::format::FileWAV::oRead(std::ifstream& inFile, size_t dataBegin, 
 	return true;
 }
 
-bool gen::file::format::FileWAV::oWrite(std::ofstream& outFile)
+bool gen::file::format::WavFile::oWrite(std::ofstream& outFile)
 {
 	if (WaveformatEx == nullptr || WaveData == nullptr)
 	{
@@ -184,7 +184,7 @@ bool gen::file::format::FileWAV::oWrite(std::ofstream& outFile)
 	return true;
 */
 
-gen::file::format::FileWAV::sFactChunk::~sFactChunk()
+gen::file::format::WavFile::sFactChunk::~sFactChunk()
 {
 	if (Data != nullptr)
 	{

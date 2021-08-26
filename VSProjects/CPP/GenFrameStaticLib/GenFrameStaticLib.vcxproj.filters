@@ -24,16 +24,16 @@
     <ClCompile Include="..\..\..\CPP\Error\NotImplementedException.cpp">
       <Filter>Error</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\CPP\File\Format\FileDDS.cpp">
+    <ClCompile Include="..\..\..\CPP\File\Format\DdsFile.cpp">
       <Filter>File\Format</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\CPP\File\Format\FileFBX.cpp">
+    <ClCompile Include="..\..\..\CPP\File\Format\FbxFile.cpp">
       <Filter>File\Format</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\CPP\File\Format\FileOBJ.cpp">
+    <ClCompile Include="..\..\..\CPP\File\Format\ObjFile.cpp">
       <Filter>File\Format</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\CPP\File\Format\FileWAV.cpp">
+    <ClCompile Include="..\..\..\CPP\File\Format\WavFile.cpp">
       <Filter>File\Format</Filter>
     </ClCompile>
   </ItemGroup>
@@ -66,19 +66,19 @@
     <ClInclude Include="..\..\..\CPP\Error\GenError.h">
       <Filter>Error</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\CPP\File\Format\FileDDS.h">
+    <ClInclude Include="..\..\..\CPP\File\Format\DdsFile.h">
       <Filter>File\Format</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\CPP\File\Format\FileFBX.h">
+    <ClInclude Include="..\..\..\CPP\File\Format\FbxFile.h">
       <Filter>File\Format</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\CPP\File\Format\FileOBJ.h">
+    <ClInclude Include="..\..\..\CPP\File\Format\ObjFile.h">
       <Filter>File\Format</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\CPP\File\Format\FileWAV.h">
+    <ClInclude Include="..\..\..\CPP\File\Format\WavFile.h">
       <Filter>File\Format</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\CPP\File\Format\GenFileFromat.h">
+    <ClInclude Include="..\..\..\CPP\File\Format\GenFromat.h">
       <Filter>File\Format</Filter>
     </ClInclude>
   </ItemGroup>

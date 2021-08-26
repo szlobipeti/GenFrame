@@ -1,4 +1,4 @@
-#include "FileDDS.h"
+#include "DdsFile.h"
 #include "..\..\Binary\GenBinary.h"
 namespace bin
 {
@@ -8,7 +8,7 @@ namespace bin
 	using namespace gen::binary::write::little;
 }
 
-gen::file::format::FileDDS::~FileDDS()
+gen::file::format::DdsFile::~DdsFile()
 {
 	if (PixelData != nullptr)
 	{
@@ -17,7 +17,7 @@ gen::file::format::FileDDS::~FileDDS()
 	return;
 }
 
-bool gen::file::format::FileDDS::oRead(std::ifstream& inFile, size_t dataBegin, size_t dataSize)
+bool gen::file::format::DdsFile::oRead(std::ifstream& inFile, size_t dataBegin, size_t dataSize)
 {
 	if (dataSize < 128)
 	{
@@ -41,7 +41,7 @@ bool gen::file::format::FileDDS::oRead(std::ifstream& inFile, size_t dataBegin, 
 	return true;
 }
 
-bool gen::file::format::FileDDS::oWrite(std::ofstream& outFile)
+bool gen::file::format::DdsFile::oWrite(std::ofstream& outFile)
 {
 	uint32_t Magic = DDS_MAGIC;
 	bin::Write(outFile, Magic);

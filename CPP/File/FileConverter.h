@@ -24,31 +24,32 @@ namespace gen
 			public: __forceinline void SetInner(T* Inner) { this->Inner = Inner; };
 			public: __forceinline void SetOuter(gen::file::File* Outer) { this->Outer = Outer; };
 
-			public: __forceinline bool ConvertFromInnerToOuter()
+			public: __forceinline bool ConvertInnerToOuter()
 			{
 				if (Inner == nullptr || Outer == nullptr)
 				{
 					return false;
 				}
 
-				return oConvertFromInnerToOuter();
+				return oConvertInnerToOuter();
 			};
-			public: __forceinline bool ConvertFromOuterToInner()
+			public: __forceinline bool ConvertOuterToInner()
 			{
 				if (Inner == nullptr || Outer == nullptr)
 				{
 					return false;
 				}
 
-				return oConvertFromOuterToInner();
+				return oConvertOuterToInner();
 			};
 
-			protected: virtual bool oConvertFromInnerToOuter() = 0;
-			protected: virtual bool oConvertFromOuterToInner() = 0;
+			protected: virtual bool oConvertInnerToOuter() = 0;
+			protected: virtual bool oConvertOuterToInner() = 0;
 			};
 
+			// Converts from Inner to Outer
 			template<typename T, typename I>
-			typename std::enable_if<std::is_base_of<FileConverter<I>, T>::value && !std::is_abstract<T>::value, bool>::type ConvertFromInnerToOuter(I* Inner, gen::file::File* Outer)
+			typename std::enable_if<std::is_base_of<FileConverter<I>, T>::value && !std::is_abstract<T>::value, bool>::type Convert(I* Inner, gen::file::File* Outer)
 			{
 				T converter;
 				converter.SetInner(Inner);
@@ -56,8 +57,9 @@ namespace gen
 				return converter.ConvertFromInnerToOuter();
 			}
 
+			// Converts from Inner to Outer
 			template<typename T, typename I>
-			typename std::enable_if<std::is_base_of<FileConverter<I>, T>::value && !std::is_abstract<T>::value, bool>::type ConvertFromOuterToInner(gen::file::File* Outer, I* Inner)
+			typename std::enable_if<std::is_base_of<FileConverter<I>, T>::value && !std::is_abstract<T>::value, bool>::type Convert(gen::file::File* Outer, I* Inner)
 			{
 				T converter;
 				converter.SetOuter(Outer);

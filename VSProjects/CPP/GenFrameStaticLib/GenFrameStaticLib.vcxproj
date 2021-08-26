@@ -167,10 +167,10 @@
     <ClCompile Include="..\..\..\CPP\Error\NotImplementedException.cpp" />
     <ClCompile Include="..\..\..\CPP\File\File.cpp" />
     <ClCompile Include="..\..\..\CPP\File\FileConverter.cpp" />
-    <ClCompile Include="..\..\..\CPP\File\Format\FileDDS.cpp" />
-    <ClCompile Include="..\..\..\CPP\File\Format\FileFBX.cpp" />
-    <ClCompile Include="..\..\..\CPP\File\Format\FileOBJ.cpp" />
-    <ClCompile Include="..\..\..\CPP\File\Format\FileWAV.cpp" />
+    <ClCompile Include="..\..\..\CPP\File\Format\DdsFile.cpp" />
+    <ClCompile Include="..\..\..\CPP\File\Format\FbxFile.cpp" />
+    <ClCompile Include="..\..\..\CPP\File\Format\ObjFile.cpp" />
+    <ClCompile Include="..\..\..\CPP\File\Format\WavFile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\CPP\Binary\BinaryRead.h" />
@@ -181,11 +181,11 @@
     <ClInclude Include="..\..\..\CPP\Error\NotImplementedException.h" />
     <ClInclude Include="..\..\..\CPP\File\File.h" />
     <ClInclude Include="..\..\..\CPP\File\FileConverter.h" />
-    <ClInclude Include="..\..\..\CPP\File\Format\FileDDS.h" />
-    <ClInclude Include="..\..\..\CPP\File\Format\FileFBX.h" />
-    <ClInclude Include="..\..\..\CPP\File\Format\FileOBJ.h" />
-    <ClInclude Include="..\..\..\CPP\File\Format\FileWAV.h" />
-    <ClInclude Include="..\..\..\CPP\File\Format\GenFileFromat.h" />
+    <ClInclude Include="..\..\..\CPP\File\Format\DdsFile.h" />
+    <ClInclude Include="..\..\..\CPP\File\Format\FbxFile.h" />
+    <ClInclude Include="..\..\..\CPP\File\Format\ObjFile.h" />
+    <ClInclude Include="..\..\..\CPP\File\Format\WavFile.h" />
+    <ClInclude Include="..\..\..\CPP\File\Format\GenFromat.h" />
     <ClInclude Include="..\..\..\CPP\File\GenFile.h" />
     <ClInclude Include="..\..\..\CPP\GenFrame.h" />
   </ItemGroup>
