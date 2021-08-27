@@ -54,7 +54,7 @@ namespace gen
 				T converter;
 				converter.SetInner(Inner);
 				converter.SetOuter(Outer);
-				return converter.ConvertFromInnerToOuter();
+				return converter.ConvertInnerToOuter();
 			}
 
 			// Converts from Inner to Outer
@@ -64,7 +64,7 @@ namespace gen
 				T converter;
 				converter.SetOuter(Outer);
 				converter.SetInner(Inner);
-				return converter.ConvertFromOuterToInner();
+				return converter.ConvertOuterToInner();
 			}
 		}
 	}
