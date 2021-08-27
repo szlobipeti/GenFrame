@@ -8,11 +8,6 @@ namespace bin
 	using namespace gen::binary::write::little;
 }
 
-gen::file::format::DdsFile::DdsFile()
-{
-	return;
-}
-
 gen::file::format::DdsFile::~DdsFile()
 {
 	if (PixelData != nullptr)
