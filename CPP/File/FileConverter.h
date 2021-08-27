@@ -23,7 +23,8 @@ namespace gen
 
 			public: __forceinline void SetInner(T* Inner) { this->Inner = Inner; };
 			public: __forceinline void SetOuter(gen::file::File* Outer) { this->Outer = Outer; };
-
+			
+			// Converts Inner file to Outer file, where Inner file has to be Valid, but Outer doesn't
 			public: __forceinline bool ConvertInnerToOuter()
 			{
 				if (Inner == nullptr || Outer == nullptr)
@@ -31,11 +32,36 @@ namespace gen
 					return false;
 				}
 
-				return oConvertInnerToOuter();
+				if (Inner->status == gen::file::File::eStatus::Uninitialized || Inner->status == gen::file::File::eStatus::Invalid)
+				{
+					return false;
+				}
+
+				if (oConvertInnerToOuter())
+				{
+					Outer->status = gen::file::File::eStatus::Valid;
+					return true;
+				}
+				else
+				{
+					return false;
+				}
 			};
+
+			// Converts Inner file to Outer file, where both files have to be Valid
 			public: __forceinline bool ConvertOuterToInner()
 			{
 				if (Inner == nullptr || Outer == nullptr)
+				{
+					return false;
+				}
+
+				if (Inner->status == gen::file::File::eStatus::Uninitialized || Outer->status == gen::file::File::eStatus::Uninitialized)
+				{
+					return false;
+				}
+
+				if (Inner->status == gen::file::File::eStatus::Invalid || Outer->status == gen::file::File::eStatus::Invalid)
 				{
 					return false;
 				}

@@ -5,6 +5,12 @@ using namespace gen::file;
 // Reads the file from the given file path
 bool File::Read(std::filesystem::path filePath)
 {
+	if (status != eStatus::Uninitialized)
+	{
+		error = eError::FileAlreadyInitialized;
+		return false;
+	}
+
 	if (!std::filesystem::is_regular_file(filePath))
 	{
 		error = eError::FileNotFound;
@@ -41,6 +47,12 @@ bool File::Read(std::filesystem::path filePath)
 // Reads the file from the given inFile ifstream to the end of the ifstream
 bool File::Read(std::ifstream& inFile)
 {
+	if (status != eStatus::Uninitialized)
+	{
+		error = eError::FileAlreadyInitialized;
+		return false;
+	}
+
 	if (!inFile.is_open())
 	{
 		error = eError::FileNotOpen;
@@ -69,6 +81,12 @@ bool File::Read(std::ifstream& inFile)
 // Reads the file from the given inFile ifstream for dataSize bytes
 bool File::Read(std::ifstream& inFile, size_t dataSize)
 {
+	if (status != eStatus::Uninitialized)
+	{
+		error = eError::FileAlreadyInitialized;
+		return false;
+	}
+
 	if (!inFile.is_open())
 	{
 		error = eError::FileNotOpen;
@@ -103,6 +121,12 @@ bool File::Read(std::ifstream& inFile, size_t dataSize)
 // Reads the file from the given inFile ifstream, beginning at dataBegin for dataSize bytes
 bool File::Read(std::ifstream& inFile, size_t dataBegin, size_t dataSize)
 {
+	if (status != eStatus::Uninitialized)
+	{
+		error = eError::FileAlreadyInitialized;
+		return false;
+	}
+
 	if (!inFile.is_open())
 	{
 		error = eError::FileNotOpen;
@@ -127,6 +151,12 @@ bool File::Read(std::ifstream& inFile, size_t dataBegin, size_t dataSize)
 // Writes the file to the given file path
 bool File::Write(std::filesystem::path filePath)
 {
+	if (status == eStatus::Invalid || status == eStatus::Uninitialized)
+	{
+		error = eError::CouldNotWriteFile;
+		return false;
+	}
+
 	std::filesystem::path dir = filePath;
 	dir.remove_filename();
 	if (!std::filesystem::is_directory(dir))
@@ -159,6 +189,12 @@ bool File::Write(std::filesystem::path filePath)
 // Writes the file to the given outFile ofstream to the end of the ofstream
 bool File::Write(std::ofstream& outFile)
 {
+	if (status == eStatus::Invalid || status == eStatus::Uninitialized)
+	{
+		error = eError::CouldNotWriteFile;
+		return false;
+	}
+
 	if (!outFile.is_open())
 	{
 		error = eError::FileNotOpen;
@@ -179,6 +215,12 @@ bool File::Write(std::ofstream& outFile)
 // Writes the file to the given file path with additional Parameters
 bool File::Write(std::filesystem::path filePath, void* additionalParameters)
 {
+	if (status == eStatus::Invalid || status == eStatus::Uninitialized)
+	{
+		error = eError::CouldNotWriteFile;
+		return false;
+	}
+
 	std::filesystem::path dir = filePath;
 	dir.remove_filename();
 	if (!std::filesystem::is_directory(dir))
@@ -210,6 +252,12 @@ bool File::Write(std::filesystem::path filePath, void* additionalParameters)
 // Writes the file to the given outFile ofstream to the end of the ofstream with additional Parameters
 bool File::Write(std::ofstream& outFile, void* additionalParameters)
 {
+	if (status == eStatus::Invalid || status == eStatus::Uninitialized)
+	{
+		error = eError::CouldNotWriteFile;
+		return false;
+	}
+
 	if (!outFile.is_open())
 	{
 		error = eError::FileNotOpen;

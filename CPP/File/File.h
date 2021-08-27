@@ -32,7 +32,8 @@ public: enum class eError
 	FileNotFound,
 	FileNotOpen,
 	CouldNotReadFile,
-	CouldNotWriteFile
+	CouldNotWriteFile,
+	FileAlreadyInitialized
 } error = eError::NoError;
 
 	  // Pure Virtaul Get Type function
