@@ -10,6 +10,8 @@ namespace gen
 	{
 		namespace write
 		{
+			extern size_t BlockSize;
+
 			template<typename T>
 			__forceinline typename std::enable_if<std::is_pointer<T>::value, void>::type Write(std::ofstream& outFile, T Value, size_t Size)
 			{
@@ -47,6 +49,8 @@ namespace gen
 
 				return true;
 			}
+
+			bool Write(std::ifstream& inFile, std::ofstream& outFile, size_t DataSize);
 
 			namespace little
 			{

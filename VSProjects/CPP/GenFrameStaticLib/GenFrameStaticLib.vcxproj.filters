@@ -36,6 +36,9 @@
     <ClCompile Include="..\..\..\CPP\File\Format\WavFile.cpp">
       <Filter>File\Format</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\CPP\Binary\BinaryWrite.cpp">
+      <Filter>Binary</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\CPP\File\File.h">
