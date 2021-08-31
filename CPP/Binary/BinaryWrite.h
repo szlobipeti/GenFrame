@@ -32,7 +32,7 @@ namespace gen
 				return true;
 			}
 
-			__forceinline bool WriteString(std::ofstream& outFile, std::string String, size_t Size = 0)
+			__forceinline bool WriteString32(std::ofstream& outFile, std::string String, uint32_t Size = 0)
 			{
 				if (String.length() == 0)
 				{
@@ -44,7 +44,7 @@ namespace gen
 					Size = String.length();
 				}
 
-				Write(outFile, &Size, sizeof(size_t));
+				Write(outFile, &Size, 4);
 				Write(outFile, &String[0], Size);
 
 				return true;

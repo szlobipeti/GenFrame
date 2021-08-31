@@ -159,7 +159,7 @@ bool File::Write(std::filesystem::path filePath)
 
 	std::filesystem::path dir = filePath;
 	dir.remove_filename();
-	if (!std::filesystem::is_directory(dir))
+	if (!std::filesystem::is_directory(dir) && dir != "")
 	{
 		error = eError::FileNotFound;
 		return false;
@@ -223,7 +223,7 @@ bool File::Write(std::filesystem::path filePath, void* additionalParameters)
 
 	std::filesystem::path dir = filePath;
 	dir.remove_filename();
-	if (!std::filesystem::is_directory(dir))
+	if (!std::filesystem::is_directory(dir) && dir != "")
 	{
 		error = eError::FileNotFound;
 		return false;

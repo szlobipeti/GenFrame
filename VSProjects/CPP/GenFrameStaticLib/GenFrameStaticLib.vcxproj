@@ -164,6 +164,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\CPP\Binary\BinaryRead.cpp" />
     <ClCompile Include="..\..\..\CPP\Binary\BinaryWrite.cpp" />
     <ClCompile Include="..\..\..\CPP\Error\NotImplementedException.cpp" />
     <ClCompile Include="..\..\..\CPP\File\File.cpp" />

@@ -10,6 +10,7 @@ namespace file
 enum class eType : size_t
 {
 	NONE,
+	bin,
 	dds,
 	wav,
 	obj,

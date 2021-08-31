@@ -39,6 +39,9 @@
     <ClCompile Include="..\..\..\CPP\Binary\BinaryWrite.cpp">
       <Filter>Binary</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\CPP\Binary\BinaryRead.cpp">
+      <Filter>Binary</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\CPP\File\File.h">
