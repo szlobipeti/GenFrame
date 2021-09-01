@@ -42,6 +42,9 @@
     <ClCompile Include="..\..\..\CPP\Binary\BinaryRead.cpp">
       <Filter>Binary</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\CPP\File\FileEditor.cpp">
+      <Filter>File</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\CPP\File\File.h">
@@ -86,6 +89,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\CPP\File\Format\GenFromat.h">
       <Filter>File\Format</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\CPP\File\FileEditor.h">
+      <Filter>File</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

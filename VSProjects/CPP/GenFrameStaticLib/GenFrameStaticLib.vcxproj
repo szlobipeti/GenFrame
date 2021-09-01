@@ -169,6 +169,7 @@
     <ClCompile Include="..\..\..\CPP\Error\NotImplementedException.cpp" />
     <ClCompile Include="..\..\..\CPP\File\File.cpp" />
     <ClCompile Include="..\..\..\CPP\File\FileConverter.cpp" />
+    <ClCompile Include="..\..\..\CPP\File\FileEditor.cpp" />
     <ClCompile Include="..\..\..\CPP\File\Format\DdsFile.cpp" />
     <ClCompile Include="..\..\..\CPP\File\Format\FbxFile.cpp" />
     <ClCompile Include="..\..\..\CPP\File\Format\ObjFile.cpp" />
@@ -183,6 +184,7 @@
     <ClInclude Include="..\..\..\CPP\Error\NotImplementedException.h" />
     <ClInclude Include="..\..\..\CPP\File\File.h" />
     <ClInclude Include="..\..\..\CPP\File\FileConverter.h" />
+    <ClInclude Include="..\..\..\CPP\File\FileEditor.h" />
     <ClInclude Include="..\..\..\CPP\File\Format\DdsFile.h" />
     <ClInclude Include="..\..\..\CPP\File\Format\FbxFile.h" />
     <ClInclude Include="..\..\..\CPP\File\Format\ObjFile.h" />
