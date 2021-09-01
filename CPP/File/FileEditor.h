@@ -13,7 +13,8 @@ namespace gen
 			{
 				T& File;
 				FileEditor() = delete;
-				FileEditor(T& File) : File{ File };
+				FileEditor(T& File) : File{ File }
+				{};
 
 			protected: virtual bool oSwapFile(T& File) = 0;
 

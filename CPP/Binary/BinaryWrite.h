@@ -41,7 +41,7 @@ namespace gen
 
 				if (Size == 0 || Size > String.length())
 				{
-					Size = String.length();
+					Size = (uint32_t)String.length();
 				}
 
 				Write(outFile, &Size, 4);
