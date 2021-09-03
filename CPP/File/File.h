@@ -22,10 +22,9 @@ class File
 {
 public: enum class eStatus
 {
-	Uninitialized,
 	Valid,
 	Invalid
-} status = eStatus::Uninitialized;
+} status = eStatus::Valid;
 
 public: enum class eError
 {
@@ -34,7 +33,6 @@ public: enum class eError
 	FileNotOpen,
 	CouldNotReadFile,
 	CouldNotWriteFile,
-	FileAlreadyInitialized
 } error = eError::NoError;
 
 	  // Pure Virtaul Get Type function

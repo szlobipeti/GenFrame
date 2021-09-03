@@ -46,7 +46,7 @@ namespace gen
 			}
 
 			// Read an unsigned integer of specified Size for String legnth, then read the String. Size is capped to size of size_t
-			__forceinline bool ReadString32(std::ifstream& inFile, std::string String)
+			__forceinline bool ReadString32(std::ifstream& inFile, std::string& String)
 			{
 				uint32_t Count = 0;
 
