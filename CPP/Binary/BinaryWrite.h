@@ -34,11 +34,6 @@ namespace gen
 
 			__forceinline bool WriteString32(std::ofstream& outFile, std::string String, uint32_t Size = 0)
 			{
-				if (String.length() == 0)
-				{
-					return false;
-				}
-
 				if (Size == 0 || Size > String.length())
 				{
 					Size = (uint32_t)String.length();
