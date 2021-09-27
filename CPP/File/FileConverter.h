@@ -42,7 +42,7 @@ namespace gen
 			// Converts Inner file to Outer file, where both files have to be Valid
 			public: __forceinline bool ConvertOuterToInner()
 			{
-				if (Inner->status == gen::file::File::eStatus::Invalid || Outer->status == gen::file::File::eStatus::Invalid)
+				if (Inner.status == gen::file::File::eStatus::Invalid || Outer.status == gen::file::File::eStatus::Invalid)
 				{
 					return false;
 				}
