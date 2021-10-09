@@ -12,10 +12,11 @@ namespace gen
 		{
 			extern size_t BlockSize;
 
+			// Write std::ofstream
 			template<typename T>
-			__forceinline typename std::enable_if<std::is_pointer<T>::value, void>::type Write(std::ofstream& outFile, T Value, size_t Size)
+			__forceinline typename std::enable_if<std::is_pointer<T>::value, void>::type Write(std::ofstream& outFile, T value, size_t Size = sizeof(T))
 			{
-				outFile.write(reinterpret_cast<char*>(Value), Size);
+				outFile.write(reinterpret_cast<char*>(value), Size);
 			}
 
 			template<typename T, typename U>
