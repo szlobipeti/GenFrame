@@ -18,10 +18,10 @@
     <ClCompile Include="..\..\..\CPP\File\File.cpp">
       <Filter>File</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\CPP\File\FileConverter.cpp">
+    <ClCompile Include="..\..\..\CPP\File\Converter.cpp">
       <Filter>File</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\CPP\Error\NotImplementedException.cpp">
+    <ClCompile Include="..\..\..\CPP\Error\Exception.cpp">
       <Filter>Error</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\CPP\File\Format\DdsFile.cpp">
@@ -42,15 +42,18 @@
     <ClCompile Include="..\..\..\CPP\Binary\BinaryRead.cpp">
       <Filter>Binary</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\CPP\File\FileEditor.cpp">
+    <ClCompile Include="..\..\..\CPP\File\Editor.cpp">
       <Filter>File</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\CPP\Binary\Binary.cpp">
+      <Filter>Binary</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\CPP\File\File.h">
       <Filter>File</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\CPP\File\FileConverter.h">
+    <ClInclude Include="..\..\..\CPP\File\Converter.h">
       <Filter>File</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\CPP\File\GenFile.h">
@@ -63,16 +66,16 @@
     <ClInclude Include="..\..\..\CPP\Binary\BinaryWrite.h">
       <Filter>Binary</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\CPP\Binary\GenBinary.h">
+    <ClInclude Include="..\..\..\CPP\Binary\GenBin.h">
       <Filter>Binary</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\CPP\Error\NotImplementedException.h">
+    <ClInclude Include="..\..\..\CPP\Error\Exception.h">
       <Filter>Error</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\CPP\Error\StaticAssert.h">
       <Filter>Error</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\CPP\Error\GenError.h">
+    <ClInclude Include="..\..\..\CPP\Error\GenErr.h">
       <Filter>Error</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\CPP\File\Format\DdsFile.h">
@@ -87,11 +90,14 @@
     <ClInclude Include="..\..\..\CPP\File\Format\WavFile.h">
       <Filter>File\Format</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\CPP\File\Format\GenFromat.h">
+    <ClInclude Include="..\..\..\CPP\File\Format\GenFormat.h">
       <Filter>File\Format</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\CPP\File\FileEditor.h">
+    <ClInclude Include="..\..\..\CPP\File\Editor.h">
       <Filter>File</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\CPP\Binary\Binary.h">
+      <Filter>Binary</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

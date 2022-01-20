@@ -3,27 +3,21 @@
 #include "..\File.h"
 #include "..\..\Dependencies\DDS.h"
 
-namespace gen
+namespace gen::file::format
 {
-	namespace file
+	class ddsFile : public iFile
 	{
-		namespace format
-		{
-			class DdsFile : public File
-			{
-			public: DDS_HEADER Header;
-			public: char* PixelData = nullptr;
-			public: size_t PixelDataSize = 0;
+	public: DDS_HEADER header;
+	public: char* pixelData = nullptr;
+	public: size_t pixelDataSize = 0;
 
-			public: ~DdsFile();
+	public: ~ddsFile();
 
-			private: __forceinline size_t oType() override { return (size_t)eType::dds; };
-			private: bool oRead(std::ifstream& inFile, size_t dataBegin, size_t dataSize) override;
-			private: bool oWrite(std::ofstream& outFile) override;
+	private: __forceinline size_t oType() override { return (size_t)type::dds; };
+	private: bool oRead(gen::bin::reader& bin) override;
+	private: bool oWrite(gen::bin::writer& bin) override;
 
-			public: static void DecompressBC1(const uint32_t width, const uint32_t height, const char* data, char*& scan0, size_t offset = 0);
-			public: static void DecompressBC3(const uint32_t width, const uint32_t height, const char* data, char*& scan0, size_t offset = 0);
-			};
-		}
-	}
+	public: static void decompressBC1(const uint32_t width, const uint32_t height, const char* data, char*& scan0, size_t offset = 0);
+	public: static void decompressBC3(const uint32_t width, const uint32_t height, const char* data, char*& scan0, size_t offset = 0);
+	};
 }

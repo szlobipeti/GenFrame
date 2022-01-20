@@ -164,32 +164,34 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\CPP\Binary\Binary.cpp" />
     <ClCompile Include="..\..\..\CPP\Binary\BinaryRead.cpp" />
     <ClCompile Include="..\..\..\CPP\Binary\BinaryWrite.cpp" />
-    <ClCompile Include="..\..\..\CPP\Error\NotImplementedException.cpp" />
+    <ClCompile Include="..\..\..\CPP\Error\Exception.cpp" />
     <ClCompile Include="..\..\..\CPP\File\File.cpp" />
-    <ClCompile Include="..\..\..\CPP\File\FileConverter.cpp" />
-    <ClCompile Include="..\..\..\CPP\File\FileEditor.cpp" />
+    <ClCompile Include="..\..\..\CPP\File\Converter.cpp" />
+    <ClCompile Include="..\..\..\CPP\File\Editor.cpp" />
     <ClCompile Include="..\..\..\CPP\File\Format\DdsFile.cpp" />
     <ClCompile Include="..\..\..\CPP\File\Format\FbxFile.cpp" />
     <ClCompile Include="..\..\..\CPP\File\Format\ObjFile.cpp" />
     <ClCompile Include="..\..\..\CPP\File\Format\WavFile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\CPP\Binary\Binary.h" />
     <ClInclude Include="..\..\..\CPP\Binary\BinaryRead.h" />
     <ClInclude Include="..\..\..\CPP\Binary\BinaryWrite.h" />
-    <ClInclude Include="..\..\..\CPP\Binary\GenBinary.h" />
-    <ClInclude Include="..\..\..\CPP\Error\GenError.h" />
+    <ClInclude Include="..\..\..\CPP\Binary\GenBin.h" />
+    <ClInclude Include="..\..\..\CPP\Error\GenErr.h" />
     <ClInclude Include="..\..\..\CPP\Error\StaticAssert.h" />
-    <ClInclude Include="..\..\..\CPP\Error\NotImplementedException.h" />
+    <ClInclude Include="..\..\..\CPP\Error\Exception.h" />
     <ClInclude Include="..\..\..\CPP\File\File.h" />
-    <ClInclude Include="..\..\..\CPP\File\FileConverter.h" />
-    <ClInclude Include="..\..\..\CPP\File\FileEditor.h" />
+    <ClInclude Include="..\..\..\CPP\File\Converter.h" />
+    <ClInclude Include="..\..\..\CPP\File\Editor.h" />
     <ClInclude Include="..\..\..\CPP\File\Format\DdsFile.h" />
     <ClInclude Include="..\..\..\CPP\File\Format\FbxFile.h" />
     <ClInclude Include="..\..\..\CPP\File\Format\ObjFile.h" />
     <ClInclude Include="..\..\..\CPP\File\Format\WavFile.h" />
-    <ClInclude Include="..\..\..\CPP\File\Format\GenFromat.h" />
+    <ClInclude Include="..\..\..\CPP\File\Format\GenFormat.h" />
     <ClInclude Include="..\..\..\CPP\File\GenFile.h" />
     <ClInclude Include="..\..\..\CPP\GenFrame.h" />
   </ItemGroup>

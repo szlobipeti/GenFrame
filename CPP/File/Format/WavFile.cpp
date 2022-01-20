@@ -1,108 +1,101 @@
 #include "WavFile.h"
-#include "..\..\Binary\GenBinary.h"
-namespace bin
-{
-	using namespace gen::binary::read;
-	using namespace gen::binary::read::little;
-	using namespace gen::binary::write;
-	using namespace gen::binary::write::little;
-}
+#include "..\..\Binary\GenBin.h"
 
-gen::file::format::WavFile::~WavFile()
+gen::file::format::wavFile::~wavFile()
 {
-	if (WaveformatEx != nullptr)
+	if (waveformatEx != nullptr)
 	{
-		free(WaveformatEx);
+		free(waveformatEx);
 	}
 
-	if (WaveData != nullptr)
+	if (waveData != nullptr)
 	{
-		free(WaveData);
+		free(waveData);
 	}
 	return;
 }
 
-bool gen::file::format::WavFile::oRead(std::ifstream& inFile, size_t dataBegin, size_t dataSize)
+bool gen::file::format::wavFile::oRead(gen::bin::reader& bin)
 {
 	uint32_t size = 0;
-	bin::Read(inFile, size);
+	bin.read(size);
 	if (size != RIFF)
 	{
 		return false;
 	}
 
-	uint32_t FileSize = 0;
-	bin::Read(inFile, FileSize);
+	uint32_t fileSize = 0;
+	bin.read(fileSize);
 
-	bin::Read(inFile, size);
+	bin.read(size);
 	if (size != WAVE)
 	{
 		return false;
 	}
 
-	bin::Read(inFile, size);
+	bin.read(size);
 	if (size != fmt_)
 	{
 		return false;
 	}
 
-	bin::Read(inFile, size);
+	bin.read(size);
 
 	tWAVEFORMATEX WaveformatTMP;
-	bin::Read(inFile, &WaveformatTMP, 18);
+	bin.read(WaveformatTMP, 18);
 	WaveformatTMP.cbSize = size - 18;
 
 	char* WaveformatExTMP = (char*)malloc(WaveformatTMP.cbSize);
-	bin::Read(inFile, WaveformatExTMP, WaveformatTMP.cbSize);
+	bin.read(WaveformatExTMP, WaveformatTMP.cbSize);
 
-	bin::Read(inFile, size);
+	bin.read(size);
 	if (size == fact)
 	{
-		bin::Read(inFile, FactChunk.DataSize);
+		bin.read(factChunk.dataSize);
 		
-		if (FactChunk.Data != nullptr)
+		if (factChunk.data != nullptr)
 		{
-			free(FactChunk.Data);
+			free(factChunk.data);
 		}
 
-		FactChunk.Data = (char*)malloc(FactChunk.DataSize);
-		bin::Read(inFile, FactChunk.Data, FactChunk.DataSize);
+		factChunk.data = (char*)malloc(factChunk.dataSize);
+		bin.read(factChunk.data, factChunk.dataSize);
 
-		bin::Read(inFile, size);
+		bin.read(size);
 	}
 
 	if (size == data)
 	{
-		bin::Read(inFile, WaveDataSize);
+		bin.read(waveDataSize);
 
-		if (WaveData != nullptr)
+		if (waveData != nullptr)
 		{
-			free(WaveData);
+			free(waveData);
 		}
 
-		WaveData = (char*)malloc(WaveDataSize);
-		bin::Read(inFile, WaveData, WaveDataSize);
+		waveData = (char*)malloc(waveDataSize);
+		bin.read(waveData, waveDataSize);
 	}
 	else
 	{
 		return false;
 	}
 
-	Waveformat = WaveformatTMP;
+	waveformat = WaveformatTMP;
 
-	if (WaveformatEx != nullptr)
+	if (waveformatEx != nullptr)
 	{
-		free(WaveformatEx);
+		free(waveformatEx);
 	}
 
-	WaveformatEx = WaveformatExTMP;
+	waveformatEx = WaveformatExTMP;
 
 	return true;
 }
 
-bool gen::file::format::WavFile::oWrite(std::ofstream& outFile)
+bool gen::file::format::wavFile::oWrite(gen::bin::writer& bin)
 {
-	if (WaveformatEx == nullptr || WaveData == nullptr)
+	if (waveformatEx == nullptr || waveData == nullptr)
 	{
 		return false;
 	}
@@ -110,42 +103,42 @@ bool gen::file::format::WavFile::oWrite(std::ofstream& outFile)
 	uint32_t size = 0;
 
 	size = RIFF;
-	bin::Write(outFile, size);
+	bin.write(size);
 
-	size = 16 /*fourcc*/ + 12 /*sizes*/ + 18 + Waveformat.cbSize + FactChunk.DataSize + (uint32_t)WaveDataSize;
-	bin::Write(outFile, size);
+	size = 16 /*fourcc*/ + 12 /*sizes*/ + 18 + waveformat.cbSize + factChunk.dataSize + (uint32_t)waveDataSize;
+	bin.write(size);
 
 	size = WAVE;
-	bin::Write(outFile, size);
+	bin.write(size);
 
 	size = fmt_;
-	bin::Write(outFile, size);
+	bin.write(size);
 
-	size = Waveformat.cbSize + 18;
-	bin::Write(outFile, size);
+	size = waveformat.cbSize + 18;
+	bin.write(size);
 
-	bin::Write(outFile, &Waveformat, 18);
-	bin::Write(outFile, WaveformatEx, Waveformat.cbSize);
+	bin.write(waveformat, 18);
+	bin.write(waveformatEx, waveformat.cbSize);
 
 	size = fact;
-	bin::Write(outFile, size);
+	bin.write(size);
 
-	bin::Write(outFile, FactChunk.DataSize);
-	bin::Write(outFile, FactChunk.Data, FactChunk.DataSize);
+	bin.write(factChunk.dataSize);
+	bin.write(factChunk.data, factChunk.dataSize);
 
 	size = data;
-	bin::Write(outFile, size);
+	bin.write(size);
 
-	bin::Write(outFile, WaveDataSize);
-	bin::Write(outFile, WaveData, WaveDataSize);
+	bin.write(waveDataSize);
+	bin.write(waveData, waveDataSize);
 
 	return true;
 }
 
 	// THIS FUNCTION MODS THE FILE FORMAT, ONLY USED WITH .NET SOUND API
-bool gen::file::format::WavFile::ToByteStream(char*& stream)
+bool gen::file::format::wavFile::toByteStream(char*& stream)
 {
-	if (WaveformatEx == nullptr || WaveData == nullptr)
+	if (waveformatEx == nullptr || waveData == nullptr)
 	{
 		return false;
 	}
@@ -155,7 +148,7 @@ bool gen::file::format::WavFile::ToByteStream(char*& stream)
 		free(stream);
 	}
 
-	stream = (char*)malloc(54 + Waveformat.cbSize + FactChunk.DataSize + WaveDataSize);
+	stream = (char*)malloc(54 + waveformat.cbSize + factChunk.dataSize + waveDataSize);
 
 	uint32_t size = 0;
 	size_t offset = 0;
@@ -164,7 +157,7 @@ bool gen::file::format::WavFile::ToByteStream(char*& stream)
 	*(uint32_t*)(stream + offset) = size;
 	offset += 4;
 
-	size = 16 /*fourcc*/ + 12 /*sizes*/ + 18 + Waveformat.cbSize + FactChunk.DataSize + (uint32_t)WaveDataSize;
+	size = 16 /*fourcc*/ + 12 /*sizes*/ + 18 + waveformat.cbSize + factChunk.dataSize + (uint32_t)waveDataSize;
 	*(uint32_t*)(stream + offset) = size;
 	offset += 4;
 
@@ -177,9 +170,9 @@ bool gen::file::format::WavFile::ToByteStream(char*& stream)
 	offset += 4;
 
 	// THIS PART MODS THE FORMAT, NOT SAFE FOR EXTERNAL USE
-	if (Waveformat.wFormatTag == 0xFFFE) // 0xFFFE waveformat extensible
+	if (waveformat.wFormatTag == 0xFFFE) // 0xFFFE waveformat extensible
 	{
-		uint16_t SubFormat = *(uint16_t*)(WaveformatEx + 6);
+		uint16_t SubFormat = *(uint16_t*)(waveformatEx + 6);
 		if (SubFormat == 1 || SubFormat == 2)
 		{
 			// if the extensible format can be simplified into regular PCM / uncomressed format
@@ -188,7 +181,7 @@ bool gen::file::format::WavFile::ToByteStream(char*& stream)
 			*(uint32_t*)(stream + offset) = size;
 			offset += 4;
 
-			*(tWAVEFORMATEX*)(stream + offset) = Waveformat; // 18
+			*(tWAVEFORMATEX*)(stream + offset) = waveformat; // 18
 			offset += 18;
 
 			// patch format at offset 0 to SubFormat
@@ -201,15 +194,15 @@ bool gen::file::format::WavFile::ToByteStream(char*& stream)
 	// ****************************************************
 	else
 	{
-		size = Waveformat.cbSize + 18;
+		size = waveformat.cbSize + 18;
 		*(uint32_t*)(stream + offset) = size;
 		offset += 4;
 
-		*(tWAVEFORMATEX*)(stream + offset) = Waveformat; // 18
+		*(tWAVEFORMATEX*)(stream + offset) = waveformat; // 18
 		offset += 18;
 		// bin::Write(outFile, &Waveformat, 18);
-		std::memcpy(stream + offset, WaveformatEx, Waveformat.cbSize);
-		offset += Waveformat.cbSize;
+		std::memcpy(stream + offset, waveformatEx, waveformat.cbSize);
+		offset += waveformat.cbSize;
 		// bin::Write(outFile, WaveformatEx, Waveformat.cbSize);
 	}
 
@@ -217,12 +210,12 @@ bool gen::file::format::WavFile::ToByteStream(char*& stream)
 	*(uint32_t*)(stream + offset) = size;
 	offset += 4;
 
-	*(uint32_t*)(stream + offset) = FactChunk.DataSize;
+	*(uint32_t*)(stream + offset) = factChunk.dataSize;
 	offset += 4;
 	// bin::Write(outFile, FactChunk.DataSize);
 
-	std::memcpy(stream + offset, FactChunk.Data, FactChunk.DataSize);
-	offset += FactChunk.DataSize;
+	std::memcpy(stream + offset, factChunk.data, factChunk.dataSize);
+	offset += factChunk.dataSize;
 	// in::Write(outFile, FactChunk.Data, FactChunk.DataSize);
 
 	size = data;
@@ -230,11 +223,11 @@ bool gen::file::format::WavFile::ToByteStream(char*& stream)
 	offset += 4;
 	// bin::Write(outFile, size);
 
-	*(uint32_t*)(stream + offset) = WaveDataSize;
+	*(uint32_t*)(stream + offset) = waveDataSize;
 	offset += 4;
 	// bin::Write(outFile, WaveDataSize);
 
-	std::memcpy(stream + offset, WaveData, WaveDataSize);
+	std::memcpy(stream + offset, waveData, waveDataSize);
 	// bin::Write(outFile, WaveData, WaveDataSize);
 
 	return true;
@@ -282,11 +275,11 @@ bool gen::file::format::WavFile::ToByteStream(char*& stream)
 	return true;
 */
 
-gen::file::format::WavFile::sFactChunk::~sFactChunk()
+gen::file::format::wavFile::factChunk::~factChunk()
 {
-	if (Data != nullptr)
+	if (data != nullptr)
 	{
-		free(Data);
+		free(data);
 	}
 	return;
 }

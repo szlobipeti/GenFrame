@@ -3,42 +3,64 @@
 using namespace gen::file;
 
 // Reads the file from the given file path
-bool File::Read(std::filesystem::path filePath)
+bool iFile::read(std::filesystem::path filePath)
 {
 	if (!std::filesystem::is_regular_file(filePath))
 	{
-		error = eError::FileNotFound;
-		status = eStatus::Invalid;
+		error = error::fileNotFound;
+		status = status::invalid;
 		return false;
 	}
 
-	std::ifstream inFile(filePath, std::ios::in | std::ios::ate | std::ios::binary);
-	if (!inFile.is_open())
+	fileName = filePath.filename().string();
+
+	gen::bin::reader bin(filePath);
+	if (!bin.isOpen())
 	{
-		error = eError::FileNotOpen;
-		status = eStatus::Invalid;
+		error = error::fileNotOpen;
+		status = status::invalid;
 		return false;
 	}
 
-	size_t dataSize = (size_t)inFile.tellg();
-
-	inFile.seekg(0, std::ios::beg);
-	if (oRead(inFile, 0, dataSize))
+	if (oRead(bin))
 	{
-		status = eStatus::Valid;
-		inFile.close();
+		status = status::valid;
 		return true;
 	}
 	else
 	{
-		error = eError::CouldNotReadFile;
-		status = eStatus::Invalid;
-		inFile.close();
+		error = error::couldNotReadFile;
+		status = status::invalid;
+		return false;
+	}
+}
+
+bool iFile::read(gen::bin::reader& bin, std::string fileName)
+{
+	this->fileName = fileName;
+
+	if (!bin.isOpen())
+	{
+		error = error::fileNotOpen;
+		status = status::invalid;
+		return false;
+	}
+
+	if (oRead(bin))
+	{
+		status = status::valid;
+		return true;
+	}
+	else
+	{
+		error = error::couldNotReadFile;
+		status = status::invalid;
 		return false;
 	}
 }
 
 // Reads the file from the given inFile ifstream to the end of the ifstream
+/*
 bool File::Read(std::ifstream& inFile)
 {
 	if (!inFile.is_open())
@@ -65,8 +87,10 @@ bool File::Read(std::ifstream& inFile)
 		return false;
 	}
 }
+*/
 
 // Reads the file from the given inFile ifstream for dataSize bytes
+/*
 bool File::Read(std::ifstream& inFile, size_t dataSize)
 {
 	if (!inFile.is_open())
@@ -99,8 +123,10 @@ bool File::Read(std::ifstream& inFile, size_t dataSize)
 		return false;
 	}
 }
+*/
 
 // Reads the file from the given inFile ifstream, beginning at dataBegin for dataSize bytes
+/*
 bool File::Read(std::ifstream& inFile, size_t dataBegin, size_t dataSize)
 {
 	if (!inFile.is_open())
@@ -123,46 +149,69 @@ bool File::Read(std::ifstream& inFile, size_t dataBegin, size_t dataSize)
 		return false;
 	}
 }
+*/
 
 // Writes the file to the given file path
-bool File::Write(std::filesystem::path filePath)
+bool iFile::write(std::filesystem::path outDirPath)
 {
-	if (status == eStatus::Invalid)
+	if (status == status::invalid)
 	{
-		error = eError::CouldNotWriteFile;
+		error = error::couldNotWriteFile;
 		return false;
 	}
 
-	std::filesystem::path dir = filePath;
-	dir.remove_filename();
-	if (!std::filesystem::is_directory(dir) && dir != "")
+	if (!std::filesystem::is_directory(outDirPath) && outDirPath != "")
 	{
-		error = eError::FileNotFound;
+		error = error::fileNotFound;
 		return false;
 	}
 
-	std::ofstream outFile(filePath, std::ios::out | std::ios::beg | std::ios::trunc | std::ios::binary);
-	if (!outFile.is_open())
+	gen::bin::writer bin(outDirPath / fileName);
+	if (!bin.isOpen())
 	{
-		error = eError::FileNotOpen;
+		error = error::fileNotOpen;
 		return false;
 	}
 
-	if (oWrite(outFile))
+	if (oWrite(bin))
 	{
-		outFile.close();
 		return true;
 	}
 	else
 	{
-		error = eError::CouldNotWriteFile;
-		std::filesystem::remove(filePath);
-		outFile.close();
+		error = error::couldNotWriteFile;
+		std::filesystem::remove(outDirPath / fileName);
+		return false;
+	}
+}
+
+bool iFile::write(gen::bin::writer& bin)
+{
+	if (status == status::invalid)
+	{
+		error = error::couldNotWriteFile;
+		return false;
+	}
+
+	if (!bin.isOpen())
+	{
+		error = error::fileNotOpen;
+		return false;
+	}
+
+	if (oWrite(bin))
+	{
+		return true;
+	}
+	else
+	{
+		error = error::couldNotWriteFile;
 		return false;
 	}
 }
 
 // Writes the file to the given outFile ofstream to the end of the ofstream
+/*
 bool File::Write(std::ofstream& outFile)
 {
 	if (status == eStatus::Invalid)
@@ -187,8 +236,10 @@ bool File::Write(std::ofstream& outFile)
 		return false;
 	}
 }
+*/
 
 // Writes the file to the given file path with additional Parameters
+/*
 bool File::Write(std::filesystem::path filePath, void* additionalParameters)
 {
 	if (status == eStatus::Invalid)
@@ -224,8 +275,10 @@ bool File::Write(std::filesystem::path filePath, void* additionalParameters)
 		return false;
 	}
 }
+*/
 
 // Writes the file to the given outFile ofstream to the end of the ofstream with additional Parameters
+/*
 bool File::Write(std::ofstream& outFile, void* additionalParameters)
 {
 	if (status == eStatus::Invalid)
@@ -250,17 +303,4 @@ bool File::Write(std::ofstream& outFile, void* additionalParameters)
 		return false;
 	}
 }
-
-// Default implementation of the Write virtual function
-bool File::vWrite(std::ofstream& outFile, void* additionalParameters)
-{
-	if (oWrite(outFile))
-	{
-		return true;
-	}
-	else
-	{
-		error = eError::CouldNotWriteFile;
-		return false;
-	}
-}
+*/

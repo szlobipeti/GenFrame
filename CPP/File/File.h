@@ -2,12 +2,13 @@
 
 #include <fstream>
 #include <filesystem>
+#include "..\Binary\GenBin.h"
 
 namespace gen
 {
 namespace file
 {
-enum class eType : size_t
+enum class type : size_t
 {
 	NONE,
 	bin,
@@ -15,44 +16,48 @@ enum class eType : size_t
 	wav,
 	obj,
 	fbx,
-	eTypeSize
+	typeSize
 };
 
-class File
+class iFile
 {
-public: enum class eStatus
+public: enum class status
 {
-	Valid,
-	Invalid
-} status = eStatus::Valid;
+	valid,
+	invalid
+} status = status::valid;
 
-public: enum class eError
+public: enum class error
 {
-	NoError,
-	FileNotFound,
-	FileNotOpen,
-	CouldNotReadFile,
-	CouldNotWriteFile,
-} error = eError::NoError;
+	noError,
+	fileNotFound,
+	fileNotOpen,
+	couldNotReadFile,
+	couldNotWriteFile,
+} error = error::noError;
+
+public: std::string fileName = "unk.bin";
 
 	  // Pure Virtaul Get Type function
 protected: __forceinline virtual size_t oType() = 0;
 
 		 // Gets the Type of the file
-public: __forceinline size_t Type() { return oType(); };
+public: __forceinline size_t type() { return oType(); };
 
 	  // Pure Virtual Read function
-protected: virtual bool oRead(std::ifstream& inFile, size_t dataBegin, size_t dataSize) = 0;
+protected: virtual bool oRead(gen::bin::reader& bin) = 0;
 
 		 // Pure Virtual Write function
-protected: virtual bool oWrite(std::ofstream& outFile) = 0;
+protected: virtual bool oWrite(gen::bin::writer& bin) = 0;
 
-		 // Default implementation of the Write virtual function
-protected: virtual bool vWrite(std::ofstream& outFile, void* additionalParameters);
 
 		 // Reads the file from the given file path
-public: bool Read(std::filesystem::path filePath);
+public: bool read(std::filesystem::path inFilePath);
 
+	  // Reads the file from the given reader
+public: bool read(gen::bin::reader& bin, std::string fileName);
+
+	  /*
 	  // Reads the file from the given inFile ifstream to the end of the ifstream
 public: bool Read(std::ifstream& inFile);
 
@@ -61,10 +66,15 @@ public: bool Read(std::ifstream& inFile, size_t dataSize);
 
 	  // Reads the file from the given inFile ifstream, beginning at dataBegin for dataSize bytes
 public: bool Read(std::ifstream& inFile, size_t dataBegin, size_t dataSize);
+	  */
 
 	  // Writes the file to the given file path
-public: bool Write(std::filesystem::path filePath);
+public: bool write(std::filesystem::path outDirPath);
 
+	  // Writes the file to the given writer
+public: bool write(gen::bin::writer& bin);
+
+	  /*
 	  // Writes the file to the given outFile ofstream to the end of the ofstream
 public: bool Write(std::ofstream& outFile);
 
@@ -73,6 +83,7 @@ public: bool Write(std::filesystem::path filePath, void* additionalParameters);
 
 	  // Writes the file to the given outFile ofstream to the end of the ofstream with additional Parameters
 public: bool Write(std::ofstream& outFile, void* additionalParameters);
+	  */
 };
 
 }

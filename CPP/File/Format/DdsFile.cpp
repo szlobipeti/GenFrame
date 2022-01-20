@@ -1,58 +1,53 @@
 #include "DdsFile.h"
-#include "..\..\Binary\GenBinary.h"
-namespace bin
-{
-	using namespace gen::binary::read;
-	using namespace gen::binary::write;
-	using namespace gen::binary::read::little;
-	using namespace gen::binary::write::little;
-}
+#include "..\..\Binary\GenBin.h"
 
-gen::file::format::DdsFile::~DdsFile()
+gen::file::format::ddsFile::~ddsFile()
 {
-	if (PixelData != nullptr)
+	if (pixelData != nullptr)
 	{
-		free(PixelData);
+		free(pixelData);
 	}
 	return;
 }
 
-bool gen::file::format::DdsFile::oRead(std::ifstream& inFile, size_t dataBegin, size_t dataSize)
+bool gen::file::format::ddsFile::oRead(gen::bin::reader& bin)
 {
-	if (dataSize < 128)
+	std::streamsize fileSize = bin.getSize();
+	if (fileSize < 128)
 	{
 		return false;
 	}
 
 	uint32_t Magic = 0;
-	bin::Read(inFile, Magic);
+	bin.read(Magic);
 
 	if (Magic != DDS_MAGIC)
 	{
 		return false;
 	}
 
-	bin::Read(inFile, &Header, 124);
+	bin.read(header, 124);
 
-	PixelDataSize = dataSize - 128;
-	PixelData = (char*)malloc(PixelDataSize);
-	bin::Read(inFile, PixelData, PixelDataSize);
+	pixelDataSize = (size_t)fileSize - 128;
+	pixelData = (char*)malloc(pixelDataSize);
+	bin.read(pixelData, pixelDataSize);
 
 	return true;
 }
 
-bool gen::file::format::DdsFile::oWrite(std::ofstream& outFile)
+bool gen::file::format::ddsFile::oWrite(gen::bin::writer& bin)
 {
 	uint32_t Magic = DDS_MAGIC;
-	bin::Write(outFile, Magic);
+	
+	bin.write(Magic);
 
-	bin::Write(outFile, &Header, 124);
-	bin::Write(outFile, PixelData, PixelDataSize);
+	bin.write(header, 124);
+	bin.write(pixelData, pixelDataSize);
 
 	return true;
 }
 
-void gen::file::format::DdsFile::DecompressBC1(const uint32_t width, const uint32_t height, const char* data, char*& scan0, size_t offset)
+void gen::file::format::ddsFile::decompressBC1(const uint32_t width, const uint32_t height, const char* data, char*& scan0, size_t offset)
 {
 	free(scan0);
 	scan0 = (char*)malloc(width * height * 3);
@@ -121,7 +116,7 @@ void gen::file::format::DdsFile::DecompressBC1(const uint32_t width, const uint3
 	}
 }
 
-void gen::file::format::DdsFile::DecompressBC3(const uint32_t width, const uint32_t height, const char* data, char*& scan0, size_t offset)
+void gen::file::format::ddsFile::decompressBC3(const uint32_t width, const uint32_t height, const char* data, char*& scan0, size_t offset)
 {
 	free(scan0);
 	scan0 = (char*)malloc(width * height * 4);

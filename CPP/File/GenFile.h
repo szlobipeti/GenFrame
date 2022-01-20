@@ -1,7 +1,7 @@
 #pragma once
 
 #include "File.h"
-#include "FileConverter.h"
-#include "FileEditor.h"
+#include "Converter.h"
+#include "Editor.h"
 
-#include "Format/GenFromat.h"
+#include "Format/GenFormat.h"
