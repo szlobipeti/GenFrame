@@ -120,7 +120,7 @@ namespace gen::bin
 	public: __forceinline void write(std::string& string, std::streamsize count) { outFile->write(reinterpret_cast<char*>(&string[0]), count); return; }
 
 	public: template<typename T = uint32_t>
-		__forceinline void write(std::string& string) { T c = string.size(); outFile->write(reinterpret_cast<char*>(&c), sizeof(T)); outFile->write(reinterpret_cast<char*>(&string[0]), c); return; }
+		__forceinline void write(std::string& string) { T c = (T)string.size(); outFile->write(reinterpret_cast<char*>(&c), sizeof(T)); outFile->write(reinterpret_cast<char*>(&string[0]), c); return; }
 
 	public: __forceinline std::ofstream* getStream() { return this->outFile; }
 	};

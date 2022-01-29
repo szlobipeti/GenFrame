@@ -19,22 +19,26 @@ enum class type : size_t
 	typeSize
 };
 
-class iFile
-{
-public: enum class status
+enum class status
 {
 	valid,
 	invalid
-} status = status::valid;
+};
 
-public: enum class error
+enum class error
 {
 	noError,
 	fileNotFound,
 	fileNotOpen,
 	couldNotReadFile,
 	couldNotWriteFile,
-} error = error::noError;
+};
+
+class iFile
+{
+public: status status = status::valid;
+
+public: error error = error::noError;
 
 public: std::string fileName = "unk.bin";
 

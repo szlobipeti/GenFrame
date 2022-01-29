@@ -20,7 +20,7 @@ namespace gen
 			public: __forceinline bool swapSource(T& File)
 			{
 				// VALIDATE
-				if (this->file.status != gen::file::iFile::status::valid || File.status != gen::file::iFile::status::valid)
+				if (this->file.status != gen::file::status::valid || File.status != gen::file::status::valid)
 				{
 					return false;
 				}
@@ -32,7 +32,7 @@ namespace gen
 
 			public: __forceinline bool swapConverted(gen::file::iFile& File)
 			{
-				if (this->file.status != gen::file::iFile::status::valid || File.status != gen::file::iFile::status::valid)
+				if (this->file.status != gen::file::status::valid || File.status != gen::file::status::valid)
 				{
 					return false;
 				}

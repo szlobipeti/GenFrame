@@ -19,14 +19,14 @@ namespace gen::file::conv
 		  // Converts Inner file to Outer file, where Inner file has to be Valid, but Outer doesn't
 	public: __forceinline bool convertInnerToOuter()
 	{
-		if (inner.status == gen::file::iFile::status::invalid)
+		if (inner.status == gen::file::status::invalid)
 		{
 			return false;
 		}
 
 		if (oConvertInnerToOuter())
 		{
-			outer.status = gen::file::iFile::status::valid;
+			outer.status = gen::file::status::valid;
 			return true;
 		}
 		else
@@ -38,7 +38,7 @@ namespace gen::file::conv
 		  // Converts Inner file to Outer file, where both files have to be Valid
 	public: __forceinline bool convertOuterToInner()
 	{
-		if (inner.status == gen::file::iFile::status::invalid || outer.status == gen::file::iFile::status::invalid)
+		if (inner.status == gen::file::status::invalid || outer.status == gen::file::status::invalid)
 		{
 			return false;
 		}
