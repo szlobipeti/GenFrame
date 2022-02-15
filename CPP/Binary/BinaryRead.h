@@ -86,6 +86,7 @@ namespace gen::bin
 	public: reader(std::ifstream* inFile, std::streamoff beginOffset, std::streamoff endOffset);
 	public: reader(std::filesystem::path inFilePath);
 	public: reader(std::filesystem::path inFilePath, std::streamoff beginOffset, std::streamoff endOffset);
+	public: reader(gen::bin::reader& bin);
 	public: ~reader();
 
 	private: std::ifstream* inFile;

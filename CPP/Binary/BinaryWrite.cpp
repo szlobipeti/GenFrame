@@ -64,6 +64,13 @@ gen::bin::writer::writer(std::filesystem::path outFilePath)
 	}
 }
 
+gen::bin::writer::writer(gen::bin::writer& bin)
+{
+	this->outFile = bin.getStream();
+	this->ownsStream = false;
+	this->beginOffset = bin.tell();
+}
+
 gen::bin::writer::~writer()
 {
 	if (ownsStream && outFile->is_open())

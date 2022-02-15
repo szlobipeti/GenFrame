@@ -37,7 +37,7 @@ namespace gen::bin
 		T tmp = ref;
 		for (size_t i = 0; i < sizeof(T); i++)
 		{
-			*(char*)(&ref + i) = *(char*)(&tmp + sizeof(T) - i - 1);
+			*((char*)(&ref) + i) = *((char*)(&tmp) + sizeof(T) - i - 1);
 		}
 		return ref;
 	}

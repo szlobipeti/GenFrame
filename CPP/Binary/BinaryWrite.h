@@ -76,6 +76,7 @@ namespace gen::bin
 	public: writer(std::ofstream* outFile);
 	public: writer(std::ofstream* outFile, std::streamoff beginOffset, std::streamoff endOffset = 0);
 	public: writer(std::filesystem::path outFilePath);
+	public: writer(gen::bin::writer& bin);
 	public: ~writer();
 
 	private: std::ofstream* outFile;

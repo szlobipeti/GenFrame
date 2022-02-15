@@ -68,6 +68,18 @@ gen::bin::reader::reader(std::filesystem::path inFilePath, std::streamoff beginO
 	this->seek(0);
 }
 
+gen::bin::reader::reader(gen::bin::reader& bin)
+{
+	this->inFile = bin.getStream();
+	this->ownsStream = false;
+	this->beginOffset = bin.tell();
+	this->endOffset = bin.endOffset;
+
+	this->setSize();
+	this->seek(0);
+	return;
+}
+
 gen::bin::reader::~reader()
 {
 	if (ownsStream && this->inFile->is_open())
